@@ -12,9 +12,7 @@ from utils.ast_parser import parse_flask_routes  # Ensure ast_parser is implemen
 # Load environment variables
 load_dotenv()
 
-# Ensure the .env file is ignored by git
-with open('.gitignore', 'a') as gitignore:
-    gitignore.write('\n.env\n')
+
 
 # Authenticate with the LLM service
 api_key = os.getenv("TOKEN_4O")
