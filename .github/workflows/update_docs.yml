@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   generate-docs:
     runs-on: ubuntu-latest
@@ -23,15 +26,28 @@ jobs:
         pip install -r requirements.txt
         pip install python-dotenv openai
 
+    - name: Debug current branch and files
+      run: |
+        echo "Current branch and files:"
+        git branch
+        ls -R
+
     - name: Generate OpenAPI documentation
       env:
-        TOKEN_4o: ${{ secrets.TOKEN_4o }}  # Pass the secret as an environment variable
-      run: python utils/openapi_generator.py
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: python -m utils.openapi_generator
 
-    - name: Commit and push changes
+    - name: Commit and push changes to gh-pages
       run: |
         git config user.name "Bharadwajreddy1406"
         git config user.email "bharadwajreddy146@gmail.com"
+        # Ensure the gh-pages branch exists
+        git checkout -b gh-pages || git checkout gh-pages
         git add openapi.json
-        git commit -m "Update API documentation"
-        git push origin gh-pages
+        git commit -m "Update API documentation" || echo "No changes to commit"
+        git push origin gh-pages --force
+
+    - name: Verify pushed changes
+      run: |
+        echo "Verify gh-pages branch content:"
+        git log --oneline
