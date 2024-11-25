@@ -1,6 +1,6 @@
 import os
 import sys
-
+from openai import OpenAI
 # Add the project root to the Python path (required for GitHub Actions)
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
