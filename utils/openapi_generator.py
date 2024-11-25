@@ -31,7 +31,7 @@ def generate_llm_description(route_metadata):
     Generate API documentation for the following route:
     - Path: {route_metadata['path']}
     - Methods: {', '.join(route_metadata['methods'])}
-    - Function Name: {route_metadata['function_name']}
+    - Function Name: {route_metadata['function']}
     - Parameters: {', '.join(route_metadata['parameters'])}
     """
     try:
