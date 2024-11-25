@@ -1,4 +1,4 @@
-name: Update API Documentation
+name: Deploy API Documentation
 
 on:
   push:
@@ -26,19 +26,17 @@ jobs:
         pip install -r requirements.txt
         pip install python-dotenv openai
 
-    - name: Debug environment variables
-      run: printenv | sort
-
-    - name: Generate OpenAPI documentation
+    - name: Generate API documentation
       env:
         TOKEN_4O: ${{ secrets.TOKEN_4O }}
       run: python -m utils.openapi_generator
 
-    - name: Commit and push changes to gh-pages
+    - name: Deploy to gh-pages
       run: |
         git config user.name "Bharadwajreddy1406"
         git config user.email "bharadwajreddy146@gmail.com"
         git checkout -b gh-pages || git checkout gh-pages
-        git add openapi.json
-        git commit -m "Update API documentation" || echo "No changes to commit"
+        mv index.html openapi.json .
+        git add index.html openapi.json
+        git commit -m "Deploy API documentation"
         git push origin gh-pages --force
