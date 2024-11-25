@@ -1,10 +1,14 @@
+.env
 # Ignore virtual environment
 venv/
+# Ignore environment variables file
 
 # Ignore Python cache
 __pycache__/
 *.pyc
 
+# Ignore OpenAPI generated files (optional)
+openapi.json
 
 # Ignore IDE settings
 .vscode/

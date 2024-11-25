@@ -1,4 +1,10 @@
 from flask import Flask, request, jsonify
+from dotenv import load_dotenv
+from utils.ast_parser import parse_flask_routes
+import os
+load_dotenv()
+api_key = os.getenv("GITHUB_TOKEN")
+
 
 app = Flask(__name__)
 
