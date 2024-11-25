@@ -17,9 +17,9 @@ with open('.gitignore', 'a') as gitignore:
     gitignore.write('\n.env\n')
 
 # Authenticate with the LLM service
-api_key = os.getenv("TOKEN_4o")
+api_key = os.getenv("TOKEN_4O")
 if not api_key:
-    raise ValueError("TOKEN_4o is not set in environment variables. Please set it in .env or GitHub Secrets.")
+    raise ValueError("TOKEN_4O is not set in environment variables. Please set it in .env or GitHub Secrets.")
 
 client = OpenAI(
     base_url="https://models.inference.ai.azure.com",
