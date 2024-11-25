@@ -26,28 +26,19 @@ jobs:
         pip install -r requirements.txt
         pip install python-dotenv openai
 
-    - name: Debug current branch and files
-      run: |
-        echo "Current branch and files:"
-        git branch
-        ls -R
+    - name: Debug environment variables
+      run: printenv | sort
 
     - name: Generate OpenAPI documentation
       env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN_4O }}
+        TOKEN_4O: ${{ secrets.TOKEN_4O }}
       run: python -m utils.openapi_generator
 
     - name: Commit and push changes to gh-pages
       run: |
         git config user.name "Bharadwajreddy1406"
         git config user.email "bharadwajreddy146@gmail.com"
-        # Ensure the gh-pages branch exists
         git checkout -b gh-pages || git checkout gh-pages
         git add openapi.json
         git commit -m "Update API documentation" || echo "No changes to commit"
         git push origin gh-pages --force
-
-    - name: Verify pushed changes
-      run: |
-        echo "Verify gh-pages branch content:"
-        git log --oneline
