@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 from openai import OpenAI
 from utils.ast_parser import parse_flask_routes
 
-# Load environment variables
 load_dotenv()
 
 # Authenticate with OpenAI
