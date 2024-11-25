@@ -5,8 +5,6 @@ venv/
 __pycache__/
 *.pyc
 
-# Ignore OpenAPI generated files (optional)
-openapi.json
 
 # Ignore IDE settings
 .vscode/
